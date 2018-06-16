@@ -1,26 +1,118 @@
+NR4C Working Group
+NR4C Example, not document
+-1
+00
+]  NR4C-%%nrev%%r
+%%s
+%d  [
+]
+[
+]
+[
+]
+[
+]
+[
+] author
+%%g
+[Page %p]  [
+8888888888                                          888            
+888                                                 888            
+888                                                 888            
+8888888    888  888  8888b.  88888b.d88b.  88888b.  888  .d88b.    
+888        `Y8bd8P'     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b   
+888          X88K   .d888888 888  888  888 888  888 888 88888888   
+888        .d8""8b. 888  888 888  888  888 888 d88P 888 Y8b.    d8b
+8888888888 888  888 "Y888888 888  888  888 88888P"  888  "Y8888 88P
+                                           888                  8P 
+                                           888                  "  
+                                           888                     
 
+                  888   
+                  888   
+                  888   
+88888b.   .d88b.  888888
+888 "88b d88""88b 888   
+888  888 888  888 888   
+888  888 Y88..88P Y88b. 
+888  888  "Y88P"   "Y888
 
+     888                                                            888   
+     888                                                            888   
+     888                                                            888   
+ .d88888  .d88b.   .d8888b 888  888 88888b.d88b.   .d88b.  88888b.  888888
+d88" 888 d88""88b d88P"    888  888 888 "888 "88b d8P  Y8b 888 "88b 888   
+888  888 888  888 888      888  888 888  888  888 88888888 888  888 888   
+Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b. 
+ "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888
 
+]  %%g
+author  [
+]  Nircek's Request 4 Comments: %%n
+%D  [
+]  Revision: %%r
+[
 
+Example, not document
 
+Status of this Memo
 
+This document does not specifies any standard of any kind. Distribution of this memo is limited.
 
+Copyright Notice
 
+Copyright (c) 2018 author
+ALL RIGHTS RESERVED!!!
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet est accumsan, congue nunc vitae, imperdiet magna. Morbi in egestas orci. Pellentesque et sagittis ipsum. Nulla id massa quis neque egestas euismod. Etiam in augue in lectus varius congue ut sed mauris. Integer ac libero libero. Praesent vel tellus semper, vulputate risus at, ornare ligula. Mauris eget ultricies arcu. In fringilla, quam sed gravida lacinia, dui elit rutrum risus, ultricies auctor ante augue vitae arcu. Vivamus quis dapibus ante, quis egestas orci. Ut luctus fermentum neque et ultricies. Aliquam id diam vestibulum enim facilisis placerat eu sit amet felis. Nunc non rhoncus odio. Morbi vestibulum commodo arcu, eget suscipit ipsum fermentum sed. 
 
+Abstract
 
+Ten dokument nic nie definiuje. Jest on potrzebny do testowania interpretera NR4C-editor.
 
+Table of Contents
 
+First
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
 
+a: \b
+c |d: \abcd
+e: \23490||23473
+f: \242423
+g: \4222
+lorem ipsum: \sit
+dolor: \amet
 
+Integer in elementum libero. Fusce tempus, ipsum sit amet consectetur vulputate, erat augue bibendum dolor, id fermentum orci arcu vitae diam.
 
+Float
 
+Donec sed nunc at leo dictum pharetra. Suspendisse nec augue luctus, egestas mi vitae, convallis odio. Phasellus vitae massa sed libero varius eleifend. Nulla gravida turpis ut elit malesuada euismod. Morbi finibus sagittis nunc, sit amet scelerisque magna convallis vitae. Mauris nec dapibus nisi, quis accumsan mi. Donec bibendum vel enim vel tempor. Proin odio mi, congue non hendrerit et, mattis vel lectus.
 
+|Recursion
+(not recurency)
 
+First sub
 
+Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor semper egestas. Vivamus sit amet egestas justo. Phasellus porttitor in lorem eget interdum. Integer id ligula malesuada, ornare sapien nec, scelerisque libero. Proin vel dignissim dui. Maecenas nec enim commodo, varius ipsum vitae, tempus dui. 
 
+a:
+b
+c
+Nunc ut ornare augue. Donec condimentum erat rutrum mauris dignissim tempor. Aliquam efficitur lectus id ultrices vulputate. In malesuada ex in semper vestibulum. Curabitur aliquet, nisi at suscipit cursus, turpis tellus semper lorem, ut consequat ligula lorem et est. Phasellus placerat, odio a eleifend fermentum, est quam sagittis nulla, non ornare dolor nisl at tellus. Curabitur venenatis est sed ligula fringilla lacinia. Suspendisse sit amet pellentesque purus.
+e
+f
+b:
+c
+d
+c: d
 
+Etiam
 
+accumsan nibh nec velit: aliquam semper
+Cras fermentum ut sem et: ornare
+Vestibulum vestibulum tempor velit:|et aliquam ante imperdiet sit amet bmet cmet dmet emet fmet gmet hmet imet jmet kmet
 This text is the only one, which is not formatted (excluding new lines).
