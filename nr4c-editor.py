@@ -1,7 +1,8 @@
 import sys
+width = 80
 
 
-def cmd(lines, i, shift='', end='\n'):
+def cmd(lines, i, shift='', noend=False):
     rlines = []
     f = False
     while not f:
@@ -9,11 +10,23 @@ def cmd(lines, i, shift='', end='\n'):
             i[0] += 1
             i[1] = 0
             break
-        if lines[i[0]][i[1]] == '"':
-            rlines += [ str(shift + lines[i[0]][i[1]+1:] + end) ]
+        if lines[i[0]][i[1]] == 'p':
+            shift += '   '
+            i[1] += 1
+        elif lines[i[0]][i[1]] == '"':
+            e = shift + lines[i[0]][i[1]+1:]
+            while len(e) > width:
+                c = e.rfind(' ', 0, 80)
+                rlines += [e[:c]+'\n']
+                e = shift + e[c+1:]
+                if noend:
+                    print('WARN(', i, '): reach end of width', sep='')
+            rlines += [e]
+            if not noend:
+                rlines[-1] += '\n'
             i[1] = len(lines[i[0]])
         else:
-            print('WARN: don\'t know command ', lines[i[0]][i[1]], ', skipping', sep='')
+            print('WARN(', i, '): don\'t know command ', lines[i[0]][i[1]], ', skipping', sep='')
             i[1] += 1
     return [rlines, i]
 
