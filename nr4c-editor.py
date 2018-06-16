@@ -28,23 +28,40 @@ import sys
 width = 80
 
 
-def cmd(lines, i, shift='', noend=False):
+def cmd(lines, i):
     rlines = []
+    shift = ['', '']
+    noend = False
     f = False
     while not f:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
             i[1] = 0
             break
-        if lines[i[0]][i[1]] == 'p':
-            shift += '   '
+        elif lines[i[0]][i[1]] == ':':
+            k = shift
+            shift = ['']
+            for j in range(len(k)):
+                shift.append(k[j])
+            i[1] += 1
+        elif lines[i[0]][i[1]] == 'e':
+            k = shift
+            shift = []
+            for j in range(1, len(k)):
+                shift.append(k[j])
+            i[1] += 1
+        elif lines[i[0]][i[1]] == 'p':
+            shift[0] += '   '
             i[1] += 1
         elif lines[i[0]][i[1]] == '"':
-            e = shift + lines[i[0]][i[1]+1:]
+            s = ''
+            for j in shift:
+                s = j + s
+            e = s + lines[i[0]][i[1]+1:]
             while len(e) > width:
                 c = e.rfind(' ', 0, 80)
                 rlines += [e[:c]+'\n']
-                e = shift + e[c+1:]
+                e = s + e[c+1:]
                 if noend:
                     print('WARN(', i, '): reach end of width', sep='')
             rlines += [e]
@@ -61,7 +78,7 @@ def interpreter(lines):
     rlines = []
     i = [0, 0]
     while i[0] < len(lines):
-        if i[0] == 26:
+        if i[0] == 6:
             print(end='')
         if len(lines[i[0]]) == 0:
             rlines += ['\n']
