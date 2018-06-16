@@ -26,18 +26,25 @@
 # SOFTWARE.
 import sys
 import re
+global width, rlines, mode, i, shift
 width = 80
+rlines = []
+mode = ''
+i = [0, 0]
+shift = ['']
 
 
-def cmd(lines, i, shift):
-    rlines = []
-    noend = False
-    f = False
-    while not f:
+
+def cmd(lines):
+    global width, rlines, mode, i, shift
+    while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
             i[1] = 0
             break
+        # elif lines[i[0]][i[1]] == 'l':
+        # elif lines[i[0]][i[1]] == 'c':
+        # elif lines[i[0]][i[1]] == 'r':
         elif lines[i[0]][i[1]] == ':':
             k = shift
             shift = ['']
@@ -67,23 +74,17 @@ def cmd(lines, i, shift):
                 rlines += [e[:c]+'\n']
                 # delete a) - etc.
                 e = re.compile('[a-zA-Z0-9_)(-]').sub(' ', s) + e[c+1:]
-                if noend:
-                    print('WARN(', i, '): reach end of width', sep='')
             rlines += [e]
-            if not noend:
-                rlines[-1] += '\n'
+            rlines[-1] += '\n'
             i[1] = len(lines[i[0]])
             shift[0] = ''
         else:
             print('WARN(', i, '): don\'t know command ', lines[i[0]][i[1]], ', skipping', sep='')
             i[1] += 1
-    return [rlines, i, shift]
 
 
 def interpreter(lines):
-    rlines = []
-    i = [0, 0]
-    shift = ['']
+    global width, rlines, mode, i, shift
     while i[0] < len(lines):
         if i[0] > 114:
             print(end='')
@@ -96,10 +97,7 @@ def interpreter(lines):
             continue
         elif lines[i[0]][0] == '/':
             i[1] = 1
-            r = cmd(lines, i, shift)
-            rlines += r[0]
-            i = r[1]
-            shift = r[2]
+            cmd(lines)
         else:
             rlines += lines[i[0]]
             i[0] += 1
