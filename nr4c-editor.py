@@ -28,9 +28,8 @@ import sys
 width = 80
 
 
-def cmd(lines, i):
+def cmd(lines, i, shift):
     rlines = []
-    shift = ['', '']
     noend = False
     f = False
     while not f:
@@ -50,6 +49,7 @@ def cmd(lines, i):
             for j in range(1, len(k)):
                 shift.append(k[j])
             i[1] += 1
+            shift[0] = ''
         elif lines[i[0]][i[1]] == 'p':
             shift[0] += '   '
             i[1] += 1
@@ -68,29 +68,33 @@ def cmd(lines, i):
             if not noend:
                 rlines[-1] += '\n'
             i[1] = len(lines[i[0]])
+            shift[0] = ''
         else:
             print('WARN(', i, '): don\'t know command ', lines[i[0]][i[1]], ', skipping', sep='')
             i[1] += 1
-    return [rlines, i]
+    return [rlines, i, shift]
 
 
 def interpreter(lines):
     rlines = []
     i = [0, 0]
+    shift = ['']
     while i[0] < len(lines):
-        if i[0] == 6:
+        if i[0] > 114:
             print(end='')
         if len(lines[i[0]]) == 0:
             rlines += ['\n']
             i[0] += 1
+            continue
         if lines[i[0]][0] == '#':
             i[0] += 1
             continue
         elif lines[i[0]][0] == '/':
             i[1] = 1
-            r = cmd(lines, i)
+            r = cmd(lines, i, shift)
             rlines += r[0]
             i = r[1]
+            shift = r[2]
         else:
             rlines += lines[i[0]]
             i[0] += 1
