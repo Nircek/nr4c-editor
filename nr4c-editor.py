@@ -25,6 +25,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import sys
+import re
 width = 80
 
 
@@ -53,6 +54,9 @@ def cmd(lines, i, shift):
         elif lines[i[0]][i[1]] == 'p':
             shift[0] += '   '
             i[1] += 1
+        elif lines[i[0]][i[1]] == '-':
+            shift[0] += ' - '
+            i[1] += 1
         elif lines[i[0]][i[1]] == '"':
             s = ''
             for j in shift:
@@ -61,7 +65,8 @@ def cmd(lines, i, shift):
             while len(e) > width:
                 c = e.rfind(' ', 0, 80)
                 rlines += [e[:c]+'\n']
-                e = s + e[c+1:]
+                # delete a) - etc.
+                e = re.compile('[a-zA-Z0-9_)(-]').sub(' ', s) + e[c+1:]
                 if noend:
                     print('WARN(', i, '): reach end of width', sep='')
             rlines += [e]
