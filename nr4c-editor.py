@@ -144,22 +144,21 @@ def interpreter(lines):
             i[1] = 1
             cmd(lines)
         else:
-            rlines += lines[i[0]]
+            rlines += [lines[i[0]]+'\n']
             i[0] += 1
-    rlines += ['\n']
     return rlines
 
 
 if __name__ == '__main__':
     try:
         if len(sys.argv) > 1:
-            fi = open(sys.argv[1], 'r')
+            fi = open(sys.argv[1], 'r', encoding='utf-8')
         else:
-            fi = open(input('INPUT FILE: '), 'r')
+            fi = open(input('INPUT FILE: '), 'r', encoding='utf-8')
         if len(sys.argv) > 2:
-            fo = open(sys.argv[2], 'w')
+            fo = open(sys.argv[2], 'w', encoding='utf-8')
         else:
-            fo = open(input('OUTPUT FILE: '), 'w')
+            fo = open(input('OUTPUT FILE: '), 'w', encoding='utf-8')
         fo.writelines(interpreter(fi.read().splitlines()))
     except FileNotFoundError:
         print('This file cannot be found...', file=sys.stderr)
