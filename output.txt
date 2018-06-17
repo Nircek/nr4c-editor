@@ -114,27 +114,27 @@ First sub
    libero. Proin vel dignissim dui. Maecenas nec enim commodo, varius ipsum
    vitae, tempus dui. 
 
-   a:
-    - b
-    - c
-    - Nunc ut ornare augue. Donec condimentum erat rutrum mauris dignissim
-      tempor. Aliquam efficitur lectus id ultrices vulputate. In malesuada ex
-      in semper vestibulum. Curabitur aliquet, nisi at suscipit cursus, turpis
-      tellus semper lorem, ut consequat ligula lorem et est. Phasellus
-      placerat, odio a eleifend fermentum, est quam sagittis nulla, non ornare
-      dolor nisl at tellus. Curabitur venenatis est sed ligula fringilla
-      lacinia. Suspendisse sit amet pellentesque purus.
-    - e
-    - f
-   b:
-    - c
-    - d
-   c: d
+   a) a:
+       - b
+       - c
+       - Nunc ut ornare augue. Donec condimentum erat rutrum mauris dignissim
+         tempor. Aliquam efficitur lectus id ultrices vulputate. In malesuada
+         ex in semper vestibulum. Curabitur aliquet, nisi at suscipit cursus,
+         turpis tellus semper lorem, ut consequat ligula lorem et est.
+         Phasellus placerat, odio a eleifend fermentum, est quam sagittis
+         nulla, non ornare dolor nisl at tellus. Curabitur venenatis est sed
+         ligula fringilla lacinia. Suspendisse sit amet pellentesque purus.
+       - e
+       - f
+   b) b:
+       - c
+       - d
+   c) c: d
 
 Etiam
 
-   accumsan nibh nec velit: aliquam semper
-   Cras fermentum ut sem et: ornare
-   Vestibulum vestibulum tempor velit:|et aliquam ante imperdiet sit amet bmet
-   cmet dmet emet fmet gmet hmet imet jmet kmet
+   a) accumsan nibh nec velit: aliquam semper
+   b) Cras fermentum ut sem et: ornare
+   c) Vestibulum vestibulum tempor velit:|et aliquam ante imperdiet sit amet
+      bmet cmet dmet emet fmet gmet hmet imet jmet kmet
 This text is the only one, which is not formatted (excluding new lines).

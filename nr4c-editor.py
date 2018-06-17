@@ -26,20 +26,20 @@
 # SOFTWARE.
 import sys
 import re
-global width, rlines, gmode,  mode, i, shift, fline
+global width, rlines, gmode,  mode, i, shift, fline, last_a
 width = 80
 rlines = []
 gmode = ''
 mode = ''
 i = [0, 0]
 shift = ['']
-last_a = ''
+last_a = [chr(ord('a')-1)]
 fline = ''
 # formatting line
 
 
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline
+    global width, rlines, gmode, mode, i, shift, fline, last_a
     while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
@@ -56,21 +56,21 @@ def cmd(lines):
             i[1] += 1
         elif lines[i[0]][i[1]] == ':':
             gmode = mode
-            k = shift
-            shift = ['']
-            for j in range(len(k)):
-                shift.append(k[j])
+            shift.insert(0, '')
+            last_a.insert(0, chr(ord('a')-1))
             i[1] += 1
         elif lines[i[0]][i[1]] == 'e':
             gmode = ''
-            k = shift
-            shift = []
-            for j in range(1, len(k)):
-                shift.append(k[j])
+            last_a.pop(0)
+            shift.pop(0)
             i[1] += 1
             shift[0] = ''
         elif lines[i[0]][i[1]] == 'p':
             shift[0] += '   '
+            i[1] += 1
+        elif lines[i[0]][i[1]] == 'a':
+            last_a[0] = chr(ord(last_a[0])+1)
+            shift[0] += last_a[0]+') '
             i[1] += 1
         elif lines[i[0]][i[1]] == '-':
             shift[0] += ' - '
