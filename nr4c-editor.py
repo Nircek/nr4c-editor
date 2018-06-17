@@ -131,7 +131,7 @@ def cmd(lines):
 def interpreter(lines):
     global width, rlines, gmode,  mode, i, shift
     while i[0] < len(lines):
-        if i[0] > 26:
+        if i[0] > 154:
             print(end='')
         if len(lines[i[0]]) == 0:
             rlines += ['\n']
@@ -146,9 +146,7 @@ def interpreter(lines):
         else:
             rlines += lines[i[0]]
             i[0] += 1
-    nrlines = []
-    for line in rlines:
-        nrlines += line + '\n'
+    rlines += ['\n']
     return rlines
 
 
