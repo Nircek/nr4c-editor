@@ -1,69 +1,75 @@
-/%10
-/%23
-/%%g"NR4C Working Group
-/%%s"NR4C Example, not document
-/%%n"-1
-/%%r"00
-/%h:
+#/%10
+#/%23
+#/%%g"NR4C Working Group
+#/%%s"NR4C Example, not document
+#/%%n"-1
+#/%%r"00
+#/%h:
 /l"]  NR4C-%%nrev%%r
 /c"%%s
 /r"%d  [
+/.l"]
+/r"[
+/.l"]
+/r"[
+/.
+#/e
+#/%f:
 /l"]
 /r"[
-/l"]
+/.l"]
 /r"[
-/e
-/%f:
-/l"]
-/r"[
-/l"]
-/r"[
-/l"] author
+/.l"] author
 /c"%%g
 # %p = numer strony
 /r"[Page %p]  [
-/e
+/.
+#/e
 /c:
 /"8888888888                                          888            
-/"888                                                 888            
-/"888                                                 888            
-/"8888888    888  888  8888b.  88888b.d88b.  88888b.  888  .d88b.    
-/"888        `Y8bd8P'     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b   
-/"888          X88K   .d888888 888  888  888 888  888 888 88888888   
-/"888        .d8""8b. 888  888 888  888  888 888 d88P 888 Y8b.    d8b
-/"8888888888 888  888 "Y888888 888  888  888 88888P"  888  "Y8888 88P
-/"                                           888                  8P 
-/"                                           888                  "  
-/"                                           888                     
+/."888                                                 888            
+/."888                                                 888            
+/."8888888    888  888  8888b.  88888b.d88b.  88888b.  888  .d88b.    
+/."888        `Y8bd8P'     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b   
+/."888          X88K   .d888888 888  888  888 888  888 888 88888888   
+/."888        .d8""8b. 888  888 888  888  888 888 d88P 888 Y8b.    d8b
+/."8888888888 888  888 "Y888888 888  888  888 88888P"  888  "Y8888 88P
+/."                                           888                  8P 
+/."                                           888                  "  
+/."                                           888                     
+/.
 
 /"                  888   
-/"                  888   
-/"                  888   
-/"88888b.   .d88b.  888888
-/"888 "88b d88""88b 888   
-/"888  888 888  888 888   
-/"888  888 Y88..88P Y88b. 
-/"888  888  "Y88P"   "Y888
+/."                  888   
+/."                  888   
+/."88888b.   .d88b.  888888
+/."888 "88b d88""88b 888   
+/."888  888 888  888 888   
+/."888  888 Y88..88P Y88b. 
+/."888  888  "Y88P"   "Y888
+/.
 
 /"     888                                                            888   
-/"     888                                                            888   
-/"     888                                                            888   
-/" .d88888  .d88b.   .d8888b 888  888 88888b.d88b.   .d88b.  88888b.  888888
-/"d88" 888 d88""88b d88P"    888  888 888 "888 "88b d8P  Y8b 888 "88b 888   
-/"888  888 888  888 888      888  888 888  888  888 88888888 888  888 888   
-/"Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b. 
-/" "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888
-/e
+/."     888                                                            888   
+/."     888                                                            888   
+/." .d88888  .d88b.   .d8888b 888  888 88888b.d88b.   .d88b.  88888b.  888888
+/."d88" 888 d88""88b d88P"    888  888 888 "888 "88b d8P  Y8b 888 "88b 888   
+/."888  888 888  888 888      888  888 888  888  888 88888888 888  888 888   
+/."Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b. 
+/." "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888
+/.e
 
 /l"]  %%g
 /r"author  [
-/l"]  Nircek's Request 4 Comments: %%n
+/.l"]  Nircek's Request 4 Comments: %%n
 #xx April xxxx
 /r"%D  [
-/l"]  Revision: %%r
+/.l"]  Revision: %%r
 /r"[
+/.
 
 /c"Example, not document
+/.
 
 /t"Status of this Memo
 
@@ -73,6 +79,7 @@
 
 /pl"Copyright (c) 2018 author
 /r"ALL RIGHTS RESERVED!!!
+/.
 
 /p"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -83,7 +90,7 @@
 /p"Ten dokument nic nie definiuje. Jest on potrzebny do testowania interpretera NR4C-editor.
 
 /t"Table of Contents
-/l
+/n
 #  1.  First ..................................................................1
 #  2.  Second .................................................................2
 #  3.  Third ..................................................................2

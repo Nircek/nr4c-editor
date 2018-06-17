@@ -1,59 +1,44 @@
-NR4C Working Group
-NR4C Example, not document
--1
-00
-]  NR4C-%%nrev%%r
-%%s
-%d  [
-]
-[
-]
-[
-]
-[
-]
-[
-] author
-%%g
-[Page %p]  [
-8888888888                                          888            
-888                                                 888            
-888                                                 888            
-8888888    888  888  8888b.  88888b.d88b.  88888b.  888  .d88b.    
-888        `Y8bd8P'     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b   
-888          X88K   .d888888 888  888  888 888  888 888 88888888   
-888        .d8""8b. 888  888 888  888  888 888 d88P 888 Y8b.    d8b
-8888888888 888  888 "Y888888 888  888  888 88888P"  888  "Y8888 88P
-                                           888                  8P 
-                                           888                  "  
-                                           888                     
+]  NR4C-%%nrev%%r                     %%s                                  %d  [
+]                                                                              [
+]                                                                              [
+]                                                                              [
+]                                                                              [
+] author                              %%g                           [Page %p]  [
+      8888888888                                          888                   
+      888                                                 888                   
+      888                                                 888                   
+      8888888    888  888  8888b.  88888b.d88b.  88888b.  888  .d88b.           
+      888        `Y8bd8P'     "88b 888 "888 "88b 888 "88b 888 d8P  Y8b          
+      888          X88K   .d888888 888  888  888 888  888 888 88888888          
+      888        .d8""8b. 888  888 888  888  888 888 d88P 888 Y8b.    d8b       
+      8888888888 888  888 "Y888888 888  888  888 88888P"  888  "Y8888 88P       
+                                                 888                  8P        
+                                                 888                  "         
+                                                 888                            
 
-                  888   
-                  888   
-                  888   
-88888b.   .d88b.  888888
-888 "88b d88""88b 888   
-888  888 888  888 888   
-888  888 Y88..88P Y88b. 
-888  888  "Y88P"   "Y888
+                                              888                               
+                                              888                               
+                                              888                               
+                            88888b.   .d88b.  888888                            
+                            888 "88b d88""88b 888                               
+                            888  888 888  888 888                               
+                            888  888 Y88..88P Y88b.                             
+                            888  888  "Y88P"   "Y888                            
 
-     888                                                            888   
-     888                                                            888   
-     888                                                            888   
- .d88888  .d88b.   .d8888b 888  888 88888b.d88b.   .d88b.  88888b.  888888
-d88" 888 d88""88b d88P"    888  888 888 "888 "88b d8P  Y8b 888 "88b 888   
-888  888 888  888 888      888  888 888  888  888 88888888 888  888 888   
-Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b. 
- "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888
+        888                                                            888      
+        888                                                            888      
+        888                                                            888      
+    .d88888  .d88b.   .d8888b 888  888 88888b.d88b.   .d88b.  88888b.  888888   
+   d88" 888 d88""88b d88P"    888  888 888 "888 "88b d8P  Y8b 888 "88b 888      
+   888  888 888  888 888      888  888 888  888  888 88888888 888  888 888      
+   Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b.    
+    "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888   
 
-]  %%g
-author  [
-]  Nircek's Request 4 Comments: %%n
-%D  [
-]  Revision: %%r
-[
+]  %%g                                                                 author  [
+]  Nircek's Request 4 Comments: %%n                                        %D  [
+]  Revision: %%r                                                               [
 
-Example, not document
+                             Example, not document                              
 
 Status of this Memo
 
@@ -62,8 +47,7 @@ Status of this Memo
 
 Copyright Notice
 
-   Copyright (c) 2018 author
-ALL RIGHTS RESERVED!!!
+   Copyright (c) 2018 author                              ALL RIGHTS RESERVED!!!
 
    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
