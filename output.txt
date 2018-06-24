@@ -1,9 +1,9 @@
-]  NR4C-%%nrev%%r                     %%s                                  %d  [
+]  NR4C--1rev00            NR4C Example, not document              2018-06-24  [
 ]                                                                              [
 ]                                                                              [
 ]                                                                              [
 ]                                                                              [
-] author                              %%g                           [Page %p]  [
+] author                       NR4C Working Group                   [Page %p]  [
       8888888888                                          888                   
       888                                                 888                   
       888                                                 888                   
@@ -34,9 +34,9 @@
    Y88b 888 Y88..88P Y88b.    Y88b 888 888  888  888 Y8b.     888  888 Y88b.    
     "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888   
 
-]  %%g                                                                 author  [
-]  Nircek's Request 4 Comments: %%n                                        %D  [
-]  Revision: %%r                                                               [
+]  NR4C Working Group                                                  author  [
+]  Nircek's Request 4 Comments: -1                               24 June 2018  [
+]  Revision: 00                                                                [
 
                              Example, not document                              
 
@@ -81,6 +81,8 @@ First
    in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet
    eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In
    finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
+
+   There should be a percent ---> %
 
     - a: \b
     - c |d: \abcd

@@ -1,12 +1,12 @@
-#/%10
-#/%23
-#/%%g"NR4C Working Group
-#/%%s"NR4C Example, not document
-#/%%n"-1
-#/%%r"00
+/%10
+/%23
+/%g"NR4C Working Group
+/%s"NR4C Example, not document
+/%n"-1
+/%r"00
 #/%h:
-/l"]  NR4C-%%nrev%%r
-/c"%%s
+/l"]  NR4C-%nrev%r
+/c"%s
 /r"%d  [
 /.l"]
 /r"[
@@ -20,7 +20,7 @@
 /.l"]
 /r"[
 /.l"] author
-/c"%%g
+/c"%g
 # %p = numer strony
 /r"[Page %p]  [
 /.
@@ -59,12 +59,12 @@
 /." "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888
 /.e
 
-/l"]  %%g
+/l"]  %g
 /r"author  [
-/.l"]  Nircek's Request 4 Comments: %%n
+/.l"]  Nircek's Request 4 Comments: %n
 #xx April xxxx
 /r"%D  [
-/.l"]  Revision: %%r
+/.l"]  Revision: %r
 /r"[
 /.
 
@@ -107,6 +107,8 @@
 /s"First
 
 /p"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
+
+/p"There should be a percent ---> %%
 
 /p:
 # tabulator liczony

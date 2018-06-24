@@ -26,7 +26,8 @@
 # SOFTWARE.
 import sys
 import re
-global width, rlines, gmode,  mode, i, shift, fline, last_a
+import datetime
+global width, rlines, gmode,  mode, i, shift, fline, last_a, v
 width = 80
 rlines = []
 gmode = ''
@@ -35,11 +36,23 @@ i = [0, 0]
 shift = ['']
 last_a = [chr(ord('a')-1)]
 fline = ''
+v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
 # formatting line
 
 
+def find(str, s):
+    i = 0
+    while True:
+        i = str.find(s, i)
+        if i == -1:
+            return i
+        if str[i-1] == s[0]:
+            continue
+        return i
+
+
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline, last_a
+    global width, rlines, gmode, mode, i, shift, fline, last_a, v
     while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
@@ -79,6 +92,14 @@ def cmd(lines):
             rlines += [fline+'\n']
             fline = ''
             i[1] += 1
+        elif lines[i[0]][i[1]] == '%':
+            e = lines[i[0]][i[1]+1:]
+            if e.find('\"') == -1:
+                i[1] += 3
+                v[e[0]] = e[1]
+            else:
+                i[1] += 1+len(e)
+                v[e[:e.find('\"')]] = e[e.find('\"')+1:]
         elif lines[i[0]][i[1]] == '"':
             m = gmode
             if mode != '':
@@ -88,6 +109,17 @@ def cmd(lines):
                 s = j + s
             w = width - len(s)
             e = lines[i[0]][i[1]+1:]
+            # changing vars to values
+            for elem in v.items():
+                while True:
+                    f = find(e, '%'+elem[0])
+                    if f == -1:
+                        break
+                    e = e[:f] + elem[1] + e[f+len(elem[0])+1:]
+            e = e.replace('%%', '%')
+
+            # setting /
+            # setting \
             if m == '':
                 while e != '':
                     e = s + e
