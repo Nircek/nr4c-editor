@@ -74,7 +74,7 @@ Abstract
 
 Table of Contents
 
-First
+1 First
 
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est
    in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae
@@ -95,7 +95,7 @@ First
    Integer in elementum libero. Fusce tempus, ipsum sit amet consectetur
    vulputate, erat augue bibendum dolor, id fermentum orci arcu vitae diam.
 
-Float
+2 Float
 
    Donec sed nunc at leo dictum pharetra. Suspendisse nec augue luctus, egestas
    mi vitae, convallis odio. Phasellus vitae massa sed libero varius eleifend.
@@ -104,10 +104,12 @@ Float
    accumsan mi. Donec bibendum vel enim vel tempor. Proin odio mi, congue non
    hendrerit et, mattis vel lectus.
 
-Recursion
-(not recurency)
+3 Recursion
+  (not recurency)
 
-First sub
+3.1 First sub ; Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis
+    ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor
+    semper...
 
    Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis ante, sed
    aliquet libero justo vitae quam. Nam egestas felis eget tortor semper
@@ -133,7 +135,7 @@ First sub
        - d
    c) c: d
 
-Etiam
+4 Etiam
 
    a) accumsan nibh nec velit: aliquam semper
    b) Cras fermentum ut sem et: ornare

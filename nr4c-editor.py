@@ -27,7 +27,7 @@
 import sys
 import re
 import datetime
-global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented
+global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented, roz, pod
 width = 80
 rlines = []
 gmode = ''
@@ -36,6 +36,8 @@ i = [0, 0]
 shift = ['']
 last_a = [chr(ord('a')-1)]
 fline = ''
+roz = 0
+pod = 0
 # formatting line
 v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
 indent = ''
@@ -60,7 +62,7 @@ def find(str, s):
 
 
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented
+    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented, roz, pod
     while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
@@ -90,6 +92,15 @@ def cmd(lines):
         elif lines[i[0]][i[1]] == 'p':
             shift[0] += '   '
             i[1] += 1
+        elif lines[i[0]][i[1]] == 's':
+            i[1] += 1
+            roz += 1
+            pod = 0
+            shift[0] += str(roz) + ' '
+        elif lines[i[0]][i[1]] == 'u':
+            i[1] += 1
+            pod += 1
+            shift[0] += str(roz) + '.' + str(pod) + ' '
         elif lines[i[0]][i[1]] == 'a':
             last_a[0] = chr(ord(last_a[0])+1)
             shift[0] += last_a[0]+') '
@@ -149,7 +160,7 @@ def cmd(lines):
                         indented = True
 
                     for k in range(len(shift)):
-                        shift[k] = re.compile('[a-zA-Z0-9_)(-]').sub(' ', shift[k])
+                        shift[k] = re.compile('[a-zA-Z0-9_)(-.]').sub(' ', shift[k])
                     s = ''
                     for j in shift:
                         s = j + s
