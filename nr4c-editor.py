@@ -27,7 +27,7 @@
 import sys
 import re
 import datetime
-global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented, roz, pod
+global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented, roz, pod, intfirst, intmax, intsec
 width = 80
 rlines = []
 gmode = ''
@@ -42,6 +42,10 @@ pod = 0
 v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
 indent = ''
 indented = False
+# int = inteligent
+intfirst = ()
+intmax = 0
+intsec = False
 
 
 def find(str, s):
@@ -62,7 +66,7 @@ def find(str, s):
 
 
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented, roz, pod
+    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented, roz, pod, intmax, intfirst, intsec
     while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
@@ -111,6 +115,27 @@ def cmd(lines):
         elif lines[i[0]][i[1]] == '/':
             indented = True
             i[1] += 1
+        elif lines[i[0]][i[1]] == '\\':
+            if intsec:
+                intmax = 0
+                intfirst = ()
+                i[1] += 1
+            else:
+                width = intfirst[0]
+                rlines = intfirst[1]
+                gmode = intfirst[2]
+                mode = intfirst[3]
+                i = intfirst[4]
+                shift = intfirst[5]
+                fline = intfirst[6]
+                last_a = intfirst[7]
+                v = intfirst[8]
+                indent = intfirst[9]
+                indented = intfirst[10]
+                roz = intfirst[11]
+                pod = intfirst[12]
+                # i[1] = 1
+            intsec = not intsec
         elif lines[i[0]][i[1]] == '.':
             rlines += [fline+'\n']
             fline = ''
@@ -140,8 +165,6 @@ def cmd(lines):
                         break
                     e = e[:f] + elem[1] + e[f+len(elem[0])+1:]
             e = e.replace('%%', '%')
-
-            # setting \
             if m == '':
                 while e != '':
                     if indented:
@@ -151,6 +174,9 @@ def cmd(lines):
                         c = e.rfind(' ', 0, 80)
                     else:
                         c = len(e)
+                    inteligent = find(e, '\\')
+                    if inteligent != -1 and intfirst == () and not intsec:
+                        intfirst = (width, rlines[:], gmode, mode, i[:], shift[:], fline, last_a, v, indent, indented, roz, pod)
                     rlines += [e[:c]+'\n']
                     f = find(rlines[-1], '|')
                     rlines[-1] = rlines[-1].replace('||', '|')
@@ -158,13 +184,31 @@ def cmd(lines):
                         indent = ' '*f
                         rlines[-1] = rlines[-1][:f] + rlines[-1][f+1:]
                         indented = True
-
                     for k in range(len(shift)):
                         shift[k] = re.compile('[a-zA-Z0-9_)(-.]').sub(' ', shift[k])
                     s = ''
                     for j in shift:
                         s = j + s
                     e = e[c+1:]
+                    inteligent = find(rlines[-1], '\\')
+                    if inteligent != -1:
+                        if intsec:
+                            # ----------
+                            ee = rlines[-1][:inteligent]+(intmax-len(rlines[-1][:inteligent]))*' '+rlines[-1][inteligent+1:]
+                            ee = ee.replace('\n', '')
+                            del rlines[-1]
+                            while True:
+                                if len(ee) > width:
+                                    c = ee.rfind(' ', 0, 80)
+                                else:
+                                    c = len(ee)
+                                rlines += [ee[:c] + '\n']
+                                if e == '':
+                                    break
+                                ee = intmax*' ' + ee
+                            # ----------
+                        else:
+                            intmax = max(intmax, inteligent)
             else:
                 if fline == '':
                     fline = s + ' '*w

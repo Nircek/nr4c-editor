@@ -84,13 +84,13 @@ Table of Contents
 
    There should be a percent ---> %
 
-    - a: \b
-    - c d: \abcd
-        e: \23490|23473
-        f: \242423
-        g: \4222
-    - lorem ipsum: \sit
-    - dolor: \amet
+    - a:           b
+    - c d:         abcd
+        e:         23490|23473
+        f:         242423
+        g:         4222
+    - lorem ipsum: sit
+    - dolor:       amet
 
    Integer in elementum libero. Fusce tempus, ipsum sit amet consectetur
    vulputate, erat augue bibendum dolor, id fermentum orci arcu vitae diam.
