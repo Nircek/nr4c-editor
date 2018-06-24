@@ -159,6 +159,6 @@
 /p:
 /a"accumsan nibh nec velit: aliquam semper
 /a"Cras fermentum ut sem et: ornare
-/a"Vestibulum vestibulum tempor velit:|et aliquam ante imperdiet sit amet bmet cmet dmet emet fmet gmet hmet imet jmet kmet
+/a"Vestibulum vestibulum tempor velit: |et aliquam ante imperdiet sit amet bmet cmet dmet emet fmet gmet hmet imet jmet kmet
 /e
 This text is the only one, which is not formatted (excluding new lines).

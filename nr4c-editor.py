@@ -27,7 +27,7 @@
 import sys
 import re
 import datetime
-global width, rlines, gmode,  mode, i, shift, fline, last_a, v
+global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented
 width = 80
 rlines = []
 gmode = ''
@@ -36,27 +36,36 @@ i = [0, 0]
 shift = ['']
 last_a = [chr(ord('a')-1)]
 fline = ''
-v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
 # formatting line
+v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
+indent = ''
+indented = False
 
 
 def find(str, s):
     i = 0
+    if len(s) >= 2:
+        if s[0] == s[1]:
+            raise ValueError('this is not possible to find string with double first character')
     while True:
         i = str.find(s, i)
         if i == -1:
             return i
         if str[i-1] == s[0]:
             continue
+        if str[i+1] == s[0]:
+            i += 2
+            continue
         return i
 
 
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline, last_a, v
+    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented
     while True:
         if not i[1] < len(lines[i[0]]):
             i[0] += 1
             i[1] = 0
+            indented = False
             break
         elif lines[i[0]][i[1]] == 'l':
             mode = 'l'
@@ -88,6 +97,9 @@ def cmd(lines):
         elif lines[i[0]][i[1]] == '-':
             shift[0] += ' - '
             i[1] += 1
+        elif lines[i[0]][i[1]] == '/':
+            indented = True
+            i[1] += 1
         elif lines[i[0]][i[1]] == '.':
             rlines += [fline+'\n']
             fline = ''
@@ -118,16 +130,24 @@ def cmd(lines):
                     e = e[:f] + elem[1] + e[f+len(elem[0])+1:]
             e = e.replace('%%', '%')
 
-            # setting /
             # setting \
             if m == '':
                 while e != '':
+                    if indented:
+                        s = indent
                     e = s + e
                     if len(e) > width:
                         c = e.rfind(' ', 0, 80)
                     else:
                         c = len(e)
                     rlines += [e[:c]+'\n']
+                    f = find(rlines[-1], '|')
+                    rlines[-1] = rlines[-1].replace('||', '|')
+                    if f != -1:
+                        indent = ' '*f
+                        rlines[-1] = rlines[-1][:f] + rlines[-1][f+1:]
+                        indented = True
+
                     for k in range(len(shift)):
                         shift[k] = re.compile('[a-zA-Z0-9_)(-]').sub(' ', shift[k])
                     s = ''
@@ -161,9 +181,9 @@ def cmd(lines):
 
 
 def interpreter(lines):
-    global width, rlines, gmode,  mode, i, shift
+    global width, rlines, gmode,  mode, i, shift, indent
     while i[0] < len(lines):
-        if i[0] > 154:
+        if i[0] > 116:
             print(end='')
         if len(lines[i[0]]) == 0:
             rlines += ['\n']

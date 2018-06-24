@@ -85,10 +85,10 @@ First
    There should be a percent ---> %
 
     - a: \b
-    - c |d: \abcd
-   e: \23490||23473
-   f: \242423
-   g: \4222
+    - c d: \abcd
+        e: \23490|23473
+        f: \242423
+        g: \4222
     - lorem ipsum: \sit
     - dolor: \amet
 
@@ -104,7 +104,7 @@ Float
    accumsan mi. Donec bibendum vel enim vel tempor. Proin odio mi, congue non
    hendrerit et, mattis vel lectus.
 
-|Recursion
+Recursion
 (not recurency)
 
 First sub
@@ -137,6 +137,7 @@ Etiam
 
    a) accumsan nibh nec velit: aliquam semper
    b) Cras fermentum ut sem et: ornare
-   c) Vestibulum vestibulum tempor velit:|et aliquam ante imperdiet sit amet
-      bmet cmet dmet emet fmet gmet hmet imet jmet kmet
+   c) Vestibulum vestibulum tempor velit: et aliquam ante imperdiet sit amet
+                                          bmet cmet dmet emet fmet gmet hmet
+                                          imet jmet kmet
 This text is the only one, which is not formatted (excluding new lines).
