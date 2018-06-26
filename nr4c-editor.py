@@ -26,139 +26,132 @@
 # SOFTWARE.
 import sys
 import re
+import copy
 import datetime
-global width, rlines, gmode,  mode, i, shift, fline, last_a, v, indent, indented, roz, pod, intfirst, intmax, intsec
-width = 80
-rlines = []
-gmode = ''
-mode = ''
-i = [0, 0]
-shift = ['']
-last_a = [chr(ord('a')-1)]
-fline = ''
-roz = 0
-pod = 0
+g = {}
+g['width'] = 80
+g['rlines'] = []
+g['gmode'] = ''
+g['mode'] = ''
+g['i'] = [0, 0]
+g['shift'] = ['']
+g['last_a'] = [chr(ord('a')-1)]
+g['fline'] = ''
+g['roz'] = 0
+g['pod'] = 0
 # formatting line
-v = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
-indent = ''
-indented = False
+g['v'] = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
+g['indent'] = ''
+g['indented'] = False
 # int = inteligent
-intfirst = ()
-intmax = 0
-intsec = False
+g['intfirst'] = ()
+g['intmax'] = 0
+g['intsec'] = False
 
 
-def find(str, s):
+def find(st, s):
     i = 0
     if len(s) >= 2:
         if s[0] == s[1]:
             raise ValueError('this is not possible to find string with double first character')
     while True:
-        i = str.find(s, i)
+        i = st.find(s, i)
         if i == -1:
             return i
-        if str[i-1] == s[0]:
+        if st[i-1] == s[0]:
             continue
-        if str[i+1] == s[0]:
+        if st[i+1] == s[0]:
             i += 2
             continue
         return i
 
 
 def cmd(lines):
-    global width, rlines, gmode, mode, i, shift, fline, last_a, v, indent, indented, roz, pod, intmax, intfirst, intsec
+    global g
     while True:
-        if not i[1] < len(lines[i[0]]):
-            i[0] += 1
-            i[1] = 0
-            indented = False
+        if not g['i'][1] < len(lines[g['i'][0]]):
+            g['i'][0] += 1
+            g['i'][1] = 0
+            g['indented'] = False
             break
-        elif lines[i[0]][i[1]] == 'l':
-            mode = 'l'
-            i[1] += 1
-        elif lines[i[0]][i[1]] == 'c':
-            mode = 'c'
-            i[1] += 1
-        elif lines[i[0]][i[1]] == 'r':
-            mode = 'r'
-            i[1] += 1
-        elif lines[i[0]][i[1]] == ':':
-            gmode = mode
-            shift.insert(0, '')
-            last_a.insert(0, chr(ord('a')-1))
-            i[1] += 1
-        elif lines[i[0]][i[1]] == 'e':
-            gmode = ''
-            last_a.pop(0)
-            shift.pop(0)
-            i[1] += 1
-            shift[0] = ''
-        elif lines[i[0]][i[1]] == 'p':
-            shift[0] += '   '
-            i[1] += 1
-        elif lines[i[0]][i[1]] == 's':
-            i[1] += 1
-            roz += 1
-            pod = 0
-            shift[0] += str(roz) + ' '
-        elif lines[i[0]][i[1]] == 'u':
-            i[1] += 1
-            pod += 1
-            shift[0] += str(roz) + '.' + str(pod) + ' '
-        elif lines[i[0]][i[1]] == 'a':
-            last_a[0] = chr(ord(last_a[0])+1)
-            shift[0] += last_a[0]+') '
-            i[1] += 1
-        elif lines[i[0]][i[1]] == '-':
-            shift[0] += ' - '
-            i[1] += 1
-        elif lines[i[0]][i[1]] == '/':
-            indented = True
-            i[1] += 1
-        elif lines[i[0]][i[1]] == '\\':
-            if intsec:
-                intmax = 0
-                intfirst = ()
-                i[1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == 'l':
+            g['mode'] = 'l'
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == 'c':
+            g['mode'] = 'c'
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == 'r':
+            g['mode'] = 'r'
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == ':':
+            g['gmode'] = g['mode']
+            g['shift'].insert(0, '')
+            g['last_a'].insert(0, chr(ord('a')-1))
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == 'e':
+            g['gmode'] = ''
+            g['last_a'].pop(0)
+            g['shift'].pop(0)
+            g['i'][1] += 1
+            g['shift'][0] = ''
+        elif lines[g['i'][0]][g['i'][1]] == 'p':
+            g['shift'][0] += '   '
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == 's':
+            g['i'][1] += 1
+            g['roz'] += 1
+            g['pod'] = 0
+            g['shift'][0] += str(g['roz']) + ' '
+        elif lines[g['i'][0]][g['i'][1]] == 'u':
+            g['i'][1] += 1
+            g['pod'] += 1
+            g['shift'][0] += str(g['roz']) + '.' + str(g['pod']) + ' '
+        elif lines[g['i'][0]][g['i'][1]] == 'a':
+            g['last_a'][0] = chr(ord(g['last_a'][0])+1)
+            g['shift'][0] += g['last_a'][0]+') '
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == '-':
+            g['shift'][0] += ' - '
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == '/':
+            g['indented'] = True
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == '\\':
+            if g['intsec']:
+                g['intmax'] = 0
+                g['intfirst'] = ()
+                g['i'][1] += 1
             else:
-                width = intfirst[0]
-                rlines = intfirst[1]
-                gmode = intfirst[2]
-                mode = intfirst[3]
-                i = intfirst[4]
-                shift = intfirst[5]
-                fline = intfirst[6]
-                last_a = intfirst[7]
-                v = intfirst[8]
-                indent = intfirst[9]
-                indented = intfirst[10]
-                roz = intfirst[11]
-                pod = intfirst[12]
-                # i[1] = 1
-            intsec = not intsec
-        elif lines[i[0]][i[1]] == '.':
-            rlines += [fline+'\n']
-            fline = ''
-            i[1] += 1
-        elif lines[i[0]][i[1]] == '%':
-            e = lines[i[0]][i[1]+1:]
+                intsec = g['intsec']
+                intmax = g['intmax']
+                g = g['intfirst']
+                # g['i'][1] = 1
+                g['intsec'] = intsec
+                g['intmax'] = intmax
+            g['intsec'] = not g['intsec']
+        elif lines[g['i'][0]][g['i'][1]] == '.':
+            g['rlines'] += [g['fline']+'\n']
+            g['fline'] = ''
+            g['i'][1] += 1
+        elif lines[g['i'][0]][g['i'][1]] == '%':
+            e = lines[g['i'][0]][g['i'][1]+1:]
             if e.find('\"') == -1:
-                i[1] += 3
-                v[e[0]] = e[1]
+                g['i'][1] += 3
+                g['v'][e[0]] = e[1]
             else:
-                i[1] += 1+len(e)
-                v[e[:e.find('\"')]] = e[e.find('\"')+1:]
-        elif lines[i[0]][i[1]] == '"':
-            m = gmode
-            if mode != '':
-                m = mode
+                g['i'][1] += 1+len(e)
+                g['v'][e[:e.find('\"')]] = e[e.find('\"')+1:]
+        elif lines[g['i'][0]][g['i'][1]] == '"':
+            m = g['gmode']
+            if g['mode'] != '':
+                m = g['mode']
             s = ''
-            for j in shift:
+            for j in g['shift']:
                 s = j + s
-            w = width - len(s)
-            e = lines[i[0]][i[1]+1:]
+            w = g['width'] - len(s)
+            e = lines[g['i'][0]][g['i'][1]+1:]
             # changing vars to values
-            for elem in v.items():
+            for elem in g['v'].items():
                 while True:
                     f = find(e, '%'+elem[0])
                     if f == -1:
@@ -167,93 +160,93 @@ def cmd(lines):
             e = e.replace('%%', '%')
             if m == '':
                 while e != '':
-                    if indented:
-                        s = indent
+                    if g['indented']:
+                        s = g['indent']
                     e = s + e
-                    if len(e) > width:
+                    if len(e) > g['width']:
                         c = e.rfind(' ', 0, 80)
                     else:
                         c = len(e)
                     inteligent = find(e, '\\')
-                    if inteligent != -1 and intfirst == () and not intsec:
-                        intfirst = (width, rlines[:], gmode, mode, i[:], shift[:], fline, last_a, v, indent, indented, roz, pod)
-                    rlines += [e[:c]+'\n']
-                    f = find(rlines[-1], '|')
-                    rlines[-1] = rlines[-1].replace('||', '|')
+                    if inteligent != -1 and g['intfirst'] == () and not g['intsec']:
+                        g['intfirst'] = copy.deepcopy(g)
+                    g['rlines'] += [e[:c]+'\n']
+                    f = find(g['rlines'][-1], '|')
+                    g['rlines'][-1] = g['rlines'][-1].replace('||', '|')
                     if f != -1:
-                        indent = ' '*f
-                        rlines[-1] = rlines[-1][:f] + rlines[-1][f+1:]
-                        indented = True
-                    for k in range(len(shift)):
-                        shift[k] = re.compile('[a-zA-Z0-9_)(-.]').sub(' ', shift[k])
+                        g['indent'] = ' '*f
+                        g['rlines'][-1] = g['rlines'][-1][:f] + g['rlines'][-1][f+1:]
+                        g['indented'] = True
+                    for k in range(len(g['shift'])):
+                        g['shift'][k] = re.compile('[a-zA-Z0-9_)(-.]').sub(' ', g['shift'][k])
                     s = ''
-                    for j in shift:
+                    for j in g['shift']:
                         s = j + s
                     e = e[c+1:]
-                    inteligent = find(rlines[-1], '\\')
+                    inteligent = find(g['rlines'][-1], '\\')
                     if inteligent != -1:
-                        if intsec:
+                        if g['intsec']:
                             # ----------
-                            ee = rlines[-1][:inteligent]+(intmax-len(rlines[-1][:inteligent]))*' '+rlines[-1][inteligent+1:]
+                            ee = g['rlines'][-1][:inteligent]+(g['intmax']-len(g['rlines'][-1][:inteligent]))*' '+g['rlines'][-1][inteligent+1:]
                             ee = ee.replace('\n', '')
-                            del rlines[-1]
+                            del g['rlines'][-1]
                             while True:
-                                if len(ee) > width:
+                                if len(ee) > g['width']:
                                     c = ee.rfind(' ', 0, 80)
                                 else:
                                     c = len(ee)
-                                rlines += [ee[:c] + '\n']
+                                g['rlines'] += [ee[:c] + '\n']
                                 if e == '':
                                     break
-                                ee = intmax*' ' + ee
+                                ee = g['intmax']*' ' + ee
                             # ----------
                         else:
-                            intmax = max(intmax, inteligent)
+                            g['intmax'] = max(g['intmax'], inteligent)
             else:
-                if fline == '':
-                    fline = s + ' '*w
-                    for k in range(len(shift)):
-                        shift[k] = re.compile('[a-zA-Z0-9_)(-]').sub(' ', shift[k])
+                if g['fline'] == '':
+                    g['fline'] = s + ' '*w
+                    for k in range(len(g['shift'])):
+                        g['shift'][k] = re.compile('[a-zA-Z0-9_)(-]').sub(' ', g['shift'][k])
                 ml = len(e)
                 if m == 'l':
                     mf = len(s)
                     me = len(s) + ml
                 elif m == 'r':
-                    mf = width - ml
-                    me = width
+                    mf = g['width'] - ml
+                    me = g['width']
                 elif m == 'c':
                     mf = len(s) + (w-ml)//2
                     me = mf + ml
-                if fline[mf:me] != ml * ' ':
-                    print('WARN(', i, '): covering \'', fline[mf:me], '\' by \'', e, '\'', sep='')
-                fline = fline[:mf] + e + fline[me:]
-            i[1] = len(lines[i[0]])
-            shift[0] = ''
-            mode = ''
+                if g['fline'][mf:me] != ml * ' ':
+                    print('WARN(', g['i'], '): covering \'', g['fline'][mf:me], '\' by \'', e, '\'', sep='')
+                g['fline'] = g['fline'][:mf] + e + g['fline'][me:]
+            g['i'][1] = len(lines[g['i'][0]])
+            g['shift'][0] = ''
+            g['mode'] = ''
         else:
-            print('WARN(', i, '): don\'t know command ', lines[i[0]][i[1]], ', skipping', sep='')
-            i[1] += 1
+            print('WARN(', g['i'], '): don\'t know command ', lines[g['i'][0]][g['i'][1]], ', skipping', sep='')
+            g['i'][1] += 1
 
 
 def interpreter(lines):
-    global width, rlines, gmode,  mode, i, shift, indent
-    while i[0] < len(lines):
-        if i[0] > 116:
+    global g
+    while g['i'][0] < len(lines):
+        if g['i'][0] > 112:
             print(end='')
-        if len(lines[i[0]]) == 0:
-            rlines += ['\n']
-            i[0] += 1
+        if len(lines[g['i'][0]]) == 0:
+            g['rlines'] += ['\n']
+            g['i'][0] += 1
             continue
-        if lines[i[0]][0] == '#':
-            i[0] += 1
+        if lines[g['i'][0]][0] == '#':
+            g['i'][0] += 1
             continue
-        elif lines[i[0]][0] == '/':
-            i[1] = 1
+        elif lines[g['i'][0]][0] == '/':
+            g['i'][1] = 1
             cmd(lines)
         else:
-            rlines += [lines[i[0]]+'\n']
-            i[0] += 1
-    return rlines
+            g['rlines'] += [lines[g['i'][0]]+'\n']
+            g['i'][0] += 1
+    return g['rlines']
 
 
 if __name__ == '__main__':
