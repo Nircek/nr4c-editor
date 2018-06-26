@@ -25,7 +25,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import sys
-import re
 import copy
 import datetime
 g = {}
@@ -178,7 +177,7 @@ def cmd(lines):
                         g['rlines'][-1] = g['rlines'][-1][:f] + g['rlines'][-1][f+1:]
                         g['indented'] = True
                     for k in range(len(g['shift'])):
-                        g['shift'][k] = re.compile('[a-zA-Z0-9_)(-.]').sub(' ', g['shift'][k])
+                        g['shift'][k] = len(g['shift'][k])*' '
                     s = ''
                     for j in g['shift']:
                         s = j + s
@@ -206,7 +205,7 @@ def cmd(lines):
                 if g['fline'] == '':
                     g['fline'] = s + ' '*w
                     for k in range(len(g['shift'])):
-                        g['shift'][k] = re.compile('[a-zA-Z0-9_)(-]').sub(' ', g['shift'][k])
+                        g['shift'][k] = len(g['shift'][k])*' '
                 ml = len(e)
                 if m == 'l':
                     mf = len(s)
@@ -231,7 +230,7 @@ def cmd(lines):
 def interpreter(lines):
     global g
     while g['i'][0] < len(lines):
-        if g['i'][0] > 112:
+        if g['i'][0] > 27:
             print(end='')
         if len(lines[g['i'][0]]) == 0:
             g['rlines'] += ['\n']
