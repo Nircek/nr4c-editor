@@ -4,7 +4,7 @@
 /%s"NR4C Example, not document
 /%n"-1
 /%r"00
-#/%h:
+/h:
 /l"]  NR4C-%nrev%r
 /c"%s
 /r"%d  [
@@ -13,7 +13,7 @@
 /.l"]
 /r"[
 /.
-#/e
+/e
 #/%f:
 /l"]
 /r"[

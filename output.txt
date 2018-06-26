@@ -1,6 +1,3 @@
-]  NR4C--1rev00            NR4C Example, not document              2018-06-26  [
-]                                                                              [
-]                                                                              [
 ]                                                                              [
 ]                                                                              [
 ] author                       NR4C Working Group                   [Page %p]  [
