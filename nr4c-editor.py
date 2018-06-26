@@ -47,11 +47,12 @@ g['indented'] = False
 g['intfirst'] = ()
 g['intmax'] = 0
 g['intsec'] = False
-g['headermode'] = False
+# didas from polish 'didaskalia' word
+g['didasmode'] = False
 g['iheader'] = None
 g['header'] = []
-g['headerindent'] = 0
-g['headeronly'] = False
+g['didasindent'] = 0
+g['didasonly'] = False
 g['stop'] = False
 g['out'] = 'rlines'
 
@@ -80,10 +81,10 @@ def cmd():
             g['i'][0] += 1
             g['i'][1] = 0
             g['indented'] = False
-            if g['headermode']:
-                if g['headerindent'] == 0:
+            if g['didasmode']:
+                if g['didasindent'] == 0:
                     g['out'] = 'rlines'
-                    if g['headeronly']:
+                    if g['didasonly']:
                         g['stop'] = True
                         return
             break
@@ -101,8 +102,8 @@ def cmd():
             g['shift'].insert(0, '')
             g['last_a'].insert(0, chr(ord('a')-1))
             g['i'][1] += 1
-            if g['headermode']:
-                g['headerindent'] += 1
+            if g['didasmode']:
+                g['didasindent'] += 1
 
         elif g['lines'][g['i'][0]][g['i'][1]] == 'e':
             g['gmode'] = ''
@@ -110,11 +111,11 @@ def cmd():
             g['shift'].pop(0)
             g['i'][1] += 1
             g['shift'][0] = ''
-            if g['headermode']:
-                g['headerindent'] -= 1
-                if g['headerindent'] == 0:
+            if g['didasmode']:
+                g['didasindent'] -= 1
+                if g['didasindent'] == 0:
                     g['out'] = 'rlines'
-                    if g['headeronly']:
+                    if g['didasonly']:
                         g['stop'] = True
                         return
         elif g['lines'][g['i'][0]][g['i'][1]] == 'p':
@@ -141,8 +142,8 @@ def cmd():
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 'h':
             g['iheader'] = g['i'].copy()
-            g['headermode'] = True
-            g['headerindent'] = 0
+            g['didasmode'] = True
+            g['didasindent'] = 0
             g['header'] = []
             g['out'] = 'header'
             g['i'][1] += 1
