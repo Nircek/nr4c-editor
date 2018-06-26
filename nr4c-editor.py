@@ -40,7 +40,7 @@ g['fline'] = ''
 g['roz'] = 0
 g['pod'] = 0
 # formatting line
-g['v'] = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d')}
+g['v'] = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d'), 'p': '0'}
 g['indent'] = ''
 g['indented'] = False
 # int = inteligent
@@ -49,12 +49,14 @@ g['intmax'] = 0
 g['intsec'] = False
 # didas from polish 'didaskalia' word
 g['didasmode'] = False
-g['iheader'] = None
-g['header'] = []
 g['didasindent'] = 0
 g['didasonly'] = False
 g['stop'] = False
 g['out'] = 'rlines'
+g['iheader'] = None
+g['header'] = []
+g['ifooter'] = None
+g['footer'] = []
 
 
 def find(st, s):
@@ -146,6 +148,13 @@ def cmd():
             g['didasindent'] = 0
             g['header'] = []
             g['out'] = 'header'
+            g['i'][1] += 1
+        elif g['lines'][g['i'][0]][g['i'][1]] == 'f':
+            g['ifooter'] = g['i'].copy()
+            g['didasmode'] = True
+            g['didasindent'] = 0
+            g['footer'] = []
+            g['out'] = 'footer'
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == '\\':
             if g['intsec']:
