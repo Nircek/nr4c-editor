@@ -57,6 +57,7 @@ g['iheader'] = None
 g['header'] = []
 g['ifooter'] = None
 g['footer'] = []
+g['split'] = False
 
 
 def find(st, s):
@@ -123,6 +124,9 @@ def cmd():
         elif g['lines'][g['i'][0]][g['i'][1]] == 'p':
             g['shift'][0] += '   '
             g['i'][1] += 1
+        elif g['lines'][g['i'][0]][g['i'][1]] == 'n':
+            g['split'] = True
+            g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 's':
             g['i'][1] += 1
             g['roz'] += 1
@@ -149,6 +153,7 @@ def cmd():
             g['header'] = []
             g['out'] = 'header'
             g['i'][1] += 1
+            g['shift'] = ['']
         elif g['lines'][g['i'][0]][g['i'][1]] == 'f':
             g['ifooter'] = g['i'].copy()
             g['didasmode'] = True
@@ -156,6 +161,7 @@ def cmd():
             g['footer'] = []
             g['out'] = 'footer'
             g['i'][1] += 1
+            g['shift'] = ['']
         elif g['lines'][g['i'][0]][g['i'][1]] == '\\':
             if g['intsec']:
                 g['intmax'] = 0
@@ -268,18 +274,17 @@ def cmd():
             g['i'][1] += 1
 
 
-def interpreter():
+def interpreter(ai=False):
     global g
-    while g['i'][0] < len(g['lines']):
-        if g['i'][0] > 5:
+    t = True
+    while (ai or t) and g['i'][0] < len(g['lines']):
+        if g['i'][0] > 162:
             print(end='')
         if len(g['lines'][g['i'][0]]) == 0:
             g['rlines'] += ['\n']
             g['i'][0] += 1
-            continue
-        if g['lines'][g['i'][0]][0] == '#':
+        elif g['lines'][g['i'][0]][0] == '#':
             g['i'][0] += 1
-            continue
         elif g['lines'][g['i'][0]][0] == '/':
             g['i'][1] = 1
             cmd()
@@ -289,7 +294,54 @@ def interpreter():
         else:
             g['rlines'] += [g['lines'][g['i'][0]]+'\n']
             g['i'][0] += 1
+        t = False
     return g['rlines']
+
+
+g['pages'] = []
+
+
+def pagebuilder():
+    global g
+    g['page'] = ''
+    while g['i'][0] < len(g['lines']):
+        gbp = copy.deepcopy(g)
+        # g BackuP
+        interpreter()
+        pagebp = g['page'][:]
+        g['page'] += ''.join(g['rlines'])
+        pagel = g['page'].splitlines(True)
+        if len(pagel) > 110 - len(g['header']) - len(g['footer']) or not g['i'][0] < len(g['lines']) or g['split']:
+            if g['i'][0] < len(g['lines']) and not g['split']:
+                g = gbp
+            else:
+                pagebp = g['page']
+            g['split'] = False
+            g['v']['p'] = str(int(g['v']['p'])+1)
+            # header/footer update ------------
+            gbp = copy.deepcopy(g)
+            g['didasonly'] = True
+            g['i'] = g['iheader']
+            interpreter(True)
+            g['didasonly'] = True
+            g['i'] = g['ifooter']
+            interpreter(True)
+            header = g['header']
+            footer = g['footer']
+            g = gbp
+            g['header'] = header
+            g['footer'] = footer
+            # ---------------------------------
+            g['pages'] += [g['header'] + pagebp.splitlines(True)]
+            g['pages'][-1] += ['\n'] * (110 - len(g['pages'][-1]) - len(g['footer'])) + g['footer']
+            g['page'] = ''
+        g['rlines'] = []
+    out = []
+    for e in g['pages']:
+        out += e
+    return out
+
+
 
 
 if __name__ == '__main__':
@@ -303,7 +355,7 @@ if __name__ == '__main__':
         else:
             fo = open(input('OUTPUT FILE: '), 'w', encoding='utf-8')
         g['lines'] = fi.read().splitlines()
-        fo.writelines(interpreter())
+        fo.writelines(pagebuilder())
     except FileNotFoundError:
         print('This file cannot be found...', file=sys.stderr)
         if len(sys.argv) > 1:

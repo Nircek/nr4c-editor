@@ -1,3 +1,6 @@
+]  NR4C--1rev00            NR4C Example, not document              2018-06-27  [
+]                                                                              [
+]                                                                              [
       8888888888                                          888                   
       888                                                 888                   
       888                                                 888                   
@@ -29,7 +32,7 @@
     "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888   
 
 ]  NR4C Working Group                                                  author  [
-]  Nircek's Request 4 Comments: -1                               26 June 2018  [
+]  Nircek's Request 4 Comments: -1                               27 June 2018  [
 ]  Revision: 00                                                                [
 
                              Example, not document                              
@@ -67,6 +70,47 @@ Abstract
    NR4C-editor.
 
 Table of Contents
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]                                                                              [
+]                                                                              [
+] author                       NR4C Working Group                    [Page 1]  [
+]  NR4C--1rev00            NR4C Example, not document              2018-06-27  [
+]                                                                              [
+]                                                                              [
 
 1 First
 
@@ -137,3 +181,40 @@ Table of Contents
                                           bmet cmet dmet emet fmet gmet hmet
                                           imet jmet kmet
 This text is the only one, which is not formatted (excluding new lines).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]                                                                              [
+]                                                                              [
+] author                       NR4C Working Group                    [Page 2]  [
