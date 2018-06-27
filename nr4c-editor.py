@@ -27,37 +27,46 @@
 import sys
 import copy
 import datetime
-g = {}
-g['lines'] = []
-g['width'] = 80
-g['rlines'] = []
-g['gmode'] = ''
-g['mode'] = ''
-g['i'] = [0, 0]
-g['shift'] = ['']
-g['last_a'] = [chr(ord('a')-1)]
-g['fline'] = ''
-g['roz'] = 0
-g['pod'] = 0
-# formatting line
-g['v'] = {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d'), 'p': '0'}
-g['indent'] = ''
-g['indented'] = False
-# int = inteligent
-g['intfirst'] = ()
-g['intmax'] = 0
-g['intsec'] = False
-# didas from polish 'didaskalia' word
-g['didasmode'] = False
-g['didasindent'] = 0
-g['didasonly'] = False
-g['stop'] = False
-g['out'] = 'rlines'
-g['iheader'] = None
-g['header'] = []
-g['ifooter'] = None
-g['footer'] = []
-g['split'] = False
+
+
+def greset():
+    global g
+    g = {
+        'lines': [],
+        'width': 80,
+        'rlines': [],
+        'gmode': '',
+        'mode': '',
+        'i': [0, 0],
+        'shift': [''],
+        'last_a': [chr(ord('a')-1)],
+        'fline': '',
+        'roz': 0,
+        'pod': 0,
+        'v': {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d'), 'p': '0'},
+        'indent': '',
+        'indented': False,
+        'intfirst': (),
+        'intmax': 0,
+        'intsec': False,
+        'didasmode': False,
+        'didasindent': 0,
+        'didasonly': False,
+        'stop': False,
+        'out': 'rlines',
+        'iheader': None,
+        'header': [],
+        'ifooter': None,
+        'footer': [],
+        'split': False,
+        'pages': [],
+        'sections': [],
+        'sectiontitle': False,
+        'sectionreg': 2
+        # 2 = collecting names
+        # 1 = collecting pages
+        # 0 = no collecting
+    }
 
 
 def find(st, s):
@@ -127,15 +136,53 @@ def cmd():
         elif g['lines'][g['i'][0]][g['i'][1]] == 'n':
             g['split'] = True
             g['i'][1] += 1
+        elif g['lines'][g['i'][0]][g['i'][1]] == 'o':
+            if g['sectionreg'] == 1:
+                for e in g['sections']:
+                    g[g['out']] += [e[0] + '\n']
+            if g['sectionreg'] == 0:
+                s = ''
+                for e in g['shift']:
+                    s += e
+                s += '   '
+                for e in g['sections']:
+                    builder = s[:]
+                    if e[0].find('.') == -1:
+                        builder += e[0] + '.  '
+                    else:
+                        builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:] + '   '
+                    if len(e[1]) < g['width']-len(builder)-len(e[2])-3:
+                        builder += e[1] + ' ' + '.'*(g['width']-len(builder)-len(e[1])-len(e[2])) + e[2]+'\n'
+                    else:
+                        c = e[1].rfind(' ', 0, g['width']-len(builder)-len(e[2])-3)
+                        builder += e[1][:c] + ' ' + '.' * (g['width'] - len(builder) - c - len(e[2])) + e[2] + '\n'
+                    g[g['out']] += [builder]
+            g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 's':
             g['i'][1] += 1
             g['roz'] += 1
             g['pod'] = 0
             g['shift'][0] += str(g['roz']) + ' '
+            if g['sectionreg'] == 2:
+                g['sections'] += [[str(g['roz'])]]
+                g['sectiontitle'] = True
+            elif g['sectionreg'] == 1:
+                for iterator in range(len(g['sections'])):
+                    if len(g['sections'][iterator]) < 3:
+                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]
+                        break
         elif g['lines'][g['i'][0]][g['i'][1]] == 'u':
             g['i'][1] += 1
             g['pod'] += 1
             g['shift'][0] += str(g['roz']) + '.' + str(g['pod']) + ' '
+            if g['sectionreg'] == 2:
+                g['sections'] += [[str(g['roz']) + '.' + str(g['pod'])]]
+                g['sectiontitle'] = True
+            elif g['sectionreg'] == 1:
+                for iterator in range(len(g['sections'])):
+                    if len(g['sections'][iterator]) < 3:
+                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]
+                        break
         elif g['lines'][g['i'][0]][g['i'][1]] == 'a':
             g['last_a'][0] = chr(ord(g['last_a'][0])+1)
             g['shift'][0] += g['last_a'][0]+') '
@@ -229,6 +276,9 @@ def cmd():
                     for j in g['shift']:
                         s = j + s
                     e = e[c+1:]
+                    if g['sectiontitle']:
+                        g['sections'][-1] += [g[g['out']][-1][len(s):-1]]
+                        g['sectiontitle'] = False
                     inteligent = find(g[g['out']][-1], '\\')
                     if inteligent != -1:
                         if g['intsec']:
@@ -298,9 +348,6 @@ def interpreter(ai=False):
     return g['rlines']
 
 
-g['pages'] = []
-
-
 def pagebuilder():
     global g
     g['page'] = ''
@@ -354,7 +401,21 @@ if __name__ == '__main__':
             fo = open(sys.argv[2], 'w', encoding='utf-8')
         else:
             fo = open(input('OUTPUT FILE: '), 'w', encoding='utf-8')
-        g['lines'] = fi.read().splitlines()
+        lines = fi.read().splitlines()
+        greset()
+        g['lines'] = lines[:]
+        pagebuilder()
+        sections = g['sections']
+        greset()
+        g['lines'] = lines[:]
+        g['sectionreg'] = 1
+        g['sections'] = sections
+        pagebuilder()
+        sections = g['sections']
+        greset()
+        g['lines'] = lines[:]
+        g['sectionreg'] = 0
+        g['sections'] = sections
         fo.writelines(pagebuilder())
     except FileNotFoundError:
         print('This file cannot be found...', file=sys.stderr)

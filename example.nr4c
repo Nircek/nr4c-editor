@@ -90,7 +90,7 @@
 /p"Ten dokument nic nie definiuje. Jest on potrzebny do testowania interpretera NR4C-editor.
 
 /t"Table of Contents
-/n
+/o
 #  1.  First ..................................................................1
 #  2.  Second .................................................................2
 #  3.  Third ..................................................................2
@@ -113,11 +113,11 @@
 /p:
 # tabulator liczony
 # - lista z myślników
-/-"a: \b
+/-"a: \b \abcd
 # szukaj '|' i ustaw wartość tabulatora (||, dla normalnego znaku)
-/-"c |d: \abcd
+/-"c |d: \abcd \abcd
 # / weź zapamiętany tabulator
-//"e: \23490||23473
+//"e: \23490||23473 \ddd
 //"f: \242423
 //"g: \4222
 /-"lorem ipsum: \sit
