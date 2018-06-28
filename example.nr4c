@@ -19,7 +19,7 @@
 /r"[
 /.l"]
 /r"[
-/.l"] author
+/.l"]  author
 /c"%g
 # %p = numer strony
 /r"[Page %p]  [
