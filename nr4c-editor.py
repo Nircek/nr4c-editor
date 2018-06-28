@@ -140,11 +140,14 @@ def cmd():
                 for e in g['sections']:
                     builder = s[:]
                     if e[0].find('.') != -1:
-                        builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:] + '   '
+                        builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:]
+                        builder += (7+len(s)-len(builder))*' '
                     elif e[0] == '':
-                        builder += e[0] + '    '
+                        builder += e[0]
+                        builder += (5+len(s)-len(builder))*' '
                     else:
-                        builder += e[0] + '.  '
+                        builder += e[0] + '.'
+                        builder += (5+len(s)-len(builder))*' '
                     if len(e[1]) < g['width']-len(builder)-len(e[2])-3:
                         builder += e[1] + ' ' + '.'*(g['width']-len(builder)-1-len(e[1])-len(e[2])) + e[2]+'\n'
                     else:
