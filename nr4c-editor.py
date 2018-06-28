@@ -74,16 +74,8 @@ def find(st, s):
     if len(s) >= 2:
         if s[0] == s[1]:
             raise ValueError('this is not possible to find string with double first character')
-    while True:
-        i = st.find(s, i)
-        if i == -1:
-            return i
-        if st[i-1] == s[0]:
-            continue
-        if st[i+1] == s[0]:
-            i += 2
-            continue
-        return i
+    st = st.replace(s[0]*2, '')
+    return st.find(s, i)
 
 
 def cmd():
@@ -346,7 +338,7 @@ def interpreter(ai=False):
     global g
     t = True
     while (ai or t) and g['i'][0] < len(g['lines']):
-        if g['i'][0] > 162:
+        if g['i'][0] > 112:
             print(end='')
         if len(g['lines'][g['i'][0]]) == 0:
             g['rlines'] += ['\n']

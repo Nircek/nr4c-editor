@@ -110,6 +110,8 @@
 /p"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
 
 /p"There should be a percent ---> %%
+/p"NR4C-%%nrev%%r
+/p"%%n%n%%n%%%n%%n%n%%%%n%n%%%%n%n%%n
 
 /p:
 # tabulator liczony
