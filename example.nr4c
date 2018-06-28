@@ -71,11 +71,12 @@
 /c"Example, not document
 /.
 
-/t"Status of this Memo
+# k is like t, but not in ToC
+/k"Status of this Memo
 
 /p"This document does not specify any standard of any kind. Distribution of this memo is limited.
 
-/t"Copyright Notice
+/k"Copyright Notice
 
 /pl"Copyright (c) 2018 author
 /r"ALL RIGHTS RESERVED!!!
@@ -85,11 +86,11 @@
 
 /p"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet est accumsan, congue nunc vitae, imperdiet magna. Morbi in egestas orci. Pellentesque et sagittis ipsum. Nulla id massa quis neque egestas euismod. Etiam in augue in lectus varius congue ut sed mauris. Integer ac libero libero. Praesent vel tellus semper, vulputate risus at, ornare ligula. Mauris eget ultricies arcu. In fringilla, quam sed gravida lacinia, dui elit rutrum risus, ultricies auctor ante augue vitae arcu. Vivamus quis dapibus ante, quis egestas orci. Ut luctus fermentum neque et ultricies. Aliquam id diam vestibulum enim facilisis placerat eu sit amet felis. Nunc non rhoncus odio. Morbi vestibulum commodo arcu, eget suscipit ipsum fermentum sed. 
 
-/t"Abstract
+/k"Abstract
 
 /p"Ten dokument nic nie definiuje. Jest on potrzebny do testowania interpretera NR4C-editor.
 
-/t"Table of Contents
+/k"Table of Contents
 /o
 #  1.  First ..................................................................1
 #  2.  Second .................................................................2

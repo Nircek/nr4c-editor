@@ -147,10 +147,12 @@ def cmd():
                 s += '   '
                 for e in g['sections']:
                     builder = s[:]
-                    if e[0].find('.') == -1:
-                        builder += e[0] + '.  '
-                    else:
+                    if e[0].find('.') != -1:
                         builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:] + '   '
+                    elif e[0] == '':
+                        builder += e[0] + '    '
+                    else:
+                        builder += e[0] + '.  '
                     if len(e[1]) < g['width']-len(builder)-len(e[2])-3:
                         builder += e[1] + ' ' + '.'*(g['width']-len(builder)-1-len(e[1])-len(e[2])) + e[2]+'\n'
                     else:
@@ -166,6 +168,20 @@ def cmd():
             g['shift'][0] += str(g['roz']) + ' '
             if g['sectionreg'] == 2:
                 g['sections'] += [[str(g['roz'])]]
+                g['sectiontitle'] = True
+            elif g['sectionreg'] == 1:
+                for iterator in range(len(g['sections'])):
+                    if len(g['sections'][iterator]) < 3:
+                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]
+                        break
+        elif g['lines'][g['i'][0]][g['i'][1]] == 't':
+            # g['last_a'] = [chr(ord('a')-1)]
+            g['i'][1] += 1
+            # g['roz'] += 1
+            # g['pod'] = 0
+            # g['shift'][0] += str(g['roz']) + ' '
+            if g['sectionreg'] == 2:
+                g['sections'] += [['']]
                 g['sectiontitle'] = True
             elif g['sectionreg'] == 1:
                 for iterator in range(len(g['sections'])):
