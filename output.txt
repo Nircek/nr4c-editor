@@ -36,7 +36,7 @@
 
 Status of this Memo
 
-   This document does not specifies any standard of any kind. Distribution of
+   This document does not specify any standard of any kind. Distribution of
    this memo is limited.
 
 Copyright Notice
