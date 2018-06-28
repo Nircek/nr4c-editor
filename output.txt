@@ -1,6 +1,3 @@
-]  NR4C--1rev00            NR4C Example, not document              2018-06-27  [
-]                                                                              [
-]                                                                              [
       8888888888                                          888                   
       888                                                 888                   
       888                                                 888                   
@@ -32,7 +29,7 @@
     "Y88888  "Y88P"   "Y8888P  "Y88888 888  888  888  "Y8888  888  888  "Y888   
 
 ]  NR4C Working Group                                                  author  [
-]  Nircek's Request 4 Comments: -1                               27 June 2018  [
+]  Nircek's Request 4 Comments: -1                               28 June 2018  [
 ]  Revision: 00                                                                [
 
                              Example, not document                              
@@ -72,7 +69,7 @@ Abstract
 Table of Contents
    1.  First ...................................................................1
    2.  Float ...................................................................1
-   3.  Recursion ...............................................................2
+   3.  Recursion ...............................................................1
      1   First sub ; Aliquam auctor, ex ac ullamcorper laoreet, nulla neque ....2
    4.  Etiam ...................................................................2
 
@@ -105,15 +102,15 @@ Table of Contents
    sit amet scelerisque magna convallis vitae. Mauris nec dapibus nisi, quis
    accumsan mi. Donec bibendum vel enim vel tempor. Proin odio mi, congue non
    hendrerit et, mattis vel lectus.
-]                                                                              [
-]                                                                              [
-] author                       NR4C Working Group                    [Page 1]  [
-]  NR4C--1rev00            NR4C Example, not document              2018-06-27  [
-]                                                                              [
-]                                                                              [
 
 3 Recursion
   (not recurency)
+]                                                                              [
+]                                                                              [
+] author                       NR4C Working Group                    [Page 1]  [
+]  NR4C--1rev00            NR4C Example, not document              2018-06-28  [
+]                                                                              [
+]                                                                              [
 
 3.1 First sub ; Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis
     ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor
@@ -151,6 +148,9 @@ Table of Contents
                                           bmet cmet dmet emet fmet gmet hmet
                                           imet jmet kmet
 This text is the only one, which is not formatted (excluding new lines).
+
+
+
 
 
 

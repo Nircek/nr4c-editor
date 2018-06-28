@@ -358,7 +358,10 @@ def pagebuilder():
         pagebp = g['page'][:]
         g['page'] += ''.join(g['rlines'])
         pagel = g['page'].splitlines(True)
-        if len(pagel) > 110 - len(g['header']) - len(g['footer']) or not g['i'][0] < len(g['lines']) or g['split']:
+        m = 110 - len(g['header']) - len(g['footer'])
+        if g['v']['p'] == '0':
+            m += len(g['header'])
+        if len(pagel) > m or not g['i'][0] < len(g['lines']) or g['split']:
             if g['i'][0] < len(g['lines']) and not g['split']:
                 g = gbp
             else:
@@ -379,7 +382,10 @@ def pagebuilder():
             g['header'] = header
             g['footer'] = footer
             # ---------------------------------
-            g['pages'] += [g['header'] + pagebp.splitlines(True)]
+            if g['v']['p'] != '1':
+                g['pages'] += [g['header'] + pagebp.splitlines(True)]
+            else:
+                g['pages'] += [pagebp.splitlines(True)]
             g['pages'][-1] += ['\n'] * (110 - len(g['pages'][-1]) - len(g['footer'])) + g['footer']
             g['page'] = ''
         g['rlines'] = []
