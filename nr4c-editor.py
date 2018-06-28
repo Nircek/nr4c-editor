@@ -159,6 +159,7 @@ def cmd():
                     g[g['out']] += [builder]
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 's':
+            g['last_a'] = [chr(ord('a')-1)]
             g['i'][1] += 1
             g['roz'] += 1
             g['pod'] = 0
@@ -172,6 +173,7 @@ def cmd():
                         g['sections'][iterator] += [str(int(g['v']['p'])+1)]
                         break
         elif g['lines'][g['i'][0]][g['i'][1]] == 'u':
+            g['last_a'] = [chr(ord('a')-1)]
             g['i'][1] += 1
             g['pod'] += 1
             g['shift'][0] += str(g['roz']) + '.' + str(g['pod']) + ' '
