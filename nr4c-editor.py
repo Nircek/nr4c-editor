@@ -152,10 +152,10 @@ def cmd():
                     else:
                         builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:] + '   '
                     if len(e[1]) < g['width']-len(builder)-len(e[2])-3:
-                        builder += e[1] + ' ' + '.'*(g['width']-len(builder)-len(e[1])-len(e[2])) + e[2]+'\n'
+                        builder += e[1] + ' ' + '.'*(g['width']-len(builder)-1-len(e[1])-len(e[2])) + e[2]+'\n'
                     else:
                         c = e[1].rfind(' ', 0, g['width']-len(builder)-len(e[2])-3)
-                        builder += e[1][:c] + ' ' + '.' * (g['width'] - len(builder) - c - len(e[2])) + e[2] + '\n'
+                        builder += e[1][:c] + ' ' + '.'*(g['width']-len(builder)-c-1-len(e[2])) + e[2] + '\n'
                     g[g['out']] += [builder]
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 's':
