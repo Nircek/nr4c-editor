@@ -43,7 +43,7 @@ def greset():
         'fline': '',
         'roz': 0,
         'pod': 0,
-        'v': {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d'), 'p': '0'},
+        'v': {'D': datetime.date.today().strftime('%#d %B %Y'), 'd': datetime.date.today().strftime('%Y-%m-%d'), 'p': '0', 'l': '\n', 'nl': '\r'},
         'indent': '',
         'indented': False,
         'intfirst': (),
@@ -62,10 +62,12 @@ def greset():
         'pages': [],
         'sections': [],
         'sectiontitle': False,
-        'sectionreg': 2
+        'sectionreg': 2,
         # 2 = collecting names
         # 1 = collecting pages
         # 0 = no collecting
+        'title': [],
+        'titled': False
     }
 
 
@@ -129,6 +131,10 @@ def cmd():
             g['split'] = True
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 'o':
+            if g['titled'] and g['out'] == 'rlines':
+                g['rlines'] += g['title']
+                g['title'] = []
+                g['titled'] = False
             if g['sectionreg'] == 1:
                 for e in g['sections']:
                     g[g['out']] += [e[0] + '\n']
@@ -139,6 +145,7 @@ def cmd():
                 s += '   '
                 for e in g['sections']:
                     builder = s[:]
+                    e[1] = e[1].replace('\r', '')
                     if e[0].find('.') != -1:
                         builder += ' '*(e[0].find('.')+1) + e[0][e[0].find('.')+1:]
                         builder += (7+len(s)-len(builder))*' '
@@ -161,6 +168,8 @@ def cmd():
             g['roz'] += 1
             g['pod'] = 0
             g['shift'][0] += str(g['roz']) + ' '
+            g['out'] = 'title'
+            g['titled'] = True
             if g['sectionreg'] == 2:
                 g['sections'] += [[str(g['roz'])]]
                 g['sectiontitle'] = True
@@ -183,10 +192,18 @@ def cmd():
                     if len(g['sections'][iterator]) < 3:
                         g['sections'][iterator] += [str(int(g['v']['p'])+1)]
                         break
+            g['out'] = 'title'
+            g['titled'] = True
+        elif g['lines'][g['i'][0]][g['i'][1]] == 'k':
+            g['out'] = 'title'
+            g['titled'] = True
+            g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 'u':
             g['last_a'] = [chr(ord('a')-1)]
             g['i'][1] += 1
             g['pod'] += 1
+            g['out'] = 'title'
+            g['titled'] = True
             g['shift'][0] += str(g['roz']) + '.' + str(g['pod']) + ' '
             if g['sectionreg'] == 2:
                 g['sections'] += [[str(g['roz']) + '.' + str(g['pod'])]]
@@ -248,6 +265,10 @@ def cmd():
                 g['i'][1] += 1+len(e)
                 g['v'][e[:e.find('\"')]] = e[e.find('\"')+1:]
         elif g['lines'][g['i'][0]][g['i'][1]] == '"':
+            if g['titled'] and g['out'] == 'rlines':
+                g['rlines'] += g['title']
+                g['title'] = []
+                g['titled'] = False
             m = g['gmode']
             if g['mode'] != '':
                 m = g['mode']
@@ -311,6 +332,12 @@ def cmd():
                             # ----------
                         else:
                             g['intmax'] = max(g['intmax'], inteligent)
+                if g['out'] == 'title':
+                    if g['title'][-1][-2] == '\r':
+                        g['title'][-1] = g['title'][-1][:-2] + '\n'
+                    else:
+                        g['title'] += ['\n']
+                    g['out'] = 'rlines'
             else:
                 if g['fline'] == '':
                     g['fline'] = s + ' '*w
@@ -341,8 +368,8 @@ def interpreter(ai=False):
     global g
     t = True
     while (ai or t) and g['i'][0] < len(g['lines']):
-        if g['i'][0] > 112:
-            print(end='')
+        if g['i'][0] > 134:
+            print(end='')  # to stop debugging here
         if len(g['lines'][g['i'][0]]) == 0:
             g['rlines'] += ['\n']
             g['i'][0] += 1
