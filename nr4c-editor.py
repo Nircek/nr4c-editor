@@ -56,7 +56,6 @@ def greset():
         'intmax': 0,            # max caught intelligent indent
         'intsec': False,        # is it second circulation of intelligent tab
         'didasmode': False,
-        # TODO: change didas to hf
         'didasindent': 0,
         'didasonly': False,
         'stop': False,          # stops interpreting (useful to hf-only mode)
@@ -118,7 +117,7 @@ def cmd():
             g['mode'] = 'r'
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == ':':   # if cmd is :
-            g['gmode'] = g['mode']  # TODO: the following ones should be in one var, that can be shifted in one move
+            g['gmode'] = g['mode']
             g['shift'].insert(0, '')
             g['last_a'].insert(0, chr(ord('a')-1))
             g['i'][1] += 1
@@ -179,7 +178,7 @@ def cmd():
             g['i'][1] += 1
         elif g['lines'][g['i'][0]][g['i'][1]] == 's':
             g['last_a'] = [chr(ord('a')-1)]             # reset last_a
-            g['i'][1] += 1  # TODO: move all command jumping to one place
+            g['i'][1] += 1
             g['roz'] += 1                               # increment section iter
             g['pod'] = 0                                # reset sub iter
             g['shift'][0] += str(g['roz']) + ' '        # add section padding
@@ -331,7 +330,6 @@ def cmd():
 
                     for k in range(len(g['shift'])):
                         g['shift'][k] = len(g['shift'][k])*' '  # replace indent with spaces (change "a) -" to "    ")
-                    # TODO: only if first line
 
                     s = ''
                     for j in g['shift']:
@@ -342,7 +340,6 @@ def cmd():
                     if g['sectiontitle']:               # if you're catching section tile
                         g['sections'][-1] += [g[g['out']][-1][len(s):-1]]  # catch
                         g['sectiontitle'] = False  # and stop catching
-                    # TODO: it should be one of first
 
                     inteligent = find(g[g['out']][-1], '\\')
                     if inteligent != -1:                # if found calling intelligent tab
@@ -366,10 +363,7 @@ def cmd():
                             g['intmax'] = max(g['intmax'], inteligent)  # update max collected intelligent indent
 
                 if g['out'] == 'title':  # if you were collecting title
-                    if g['title'][-1][-2] == '\r':  # TODO: to trza zmienić... albo na jakąś zmienną, która zawiera
-                        # TODO: odstęp, ale te nl trza wywalić i się niczym nie przejmować, zrobić jakiś domyślny odstęp
-                        # TODO: i zastosować to do wszystkich elementów, oprócz formatowanych, i tyle.
-                        # TODO: (sorry for Polish lang, but I must fast typing)
+                    if g['title'][-1][-2] == '\r':
                         g['title'][-1] = g['title'][-1][:-2] + '\n'
                     else:
                         g['title'] += ['\n']
@@ -394,7 +388,6 @@ def cmd():
                 elif m == 'c':
                     mf = len(s) + (w-ml)//2
                     me = mf + ml                                # */
-                # TODO: else error with our text
 
                 if g['fline'][mf:me] != ml * ' ':               # covering warning
                     print('WARN(', g['i'], '): covering \'', g['fline'][mf:me], '\' by \'', e, '\'', sep='')
@@ -455,7 +448,7 @@ def pagebuilder():
                 pagebp = g['page']
             g['split'] = False
             g['v']['p'] = str(int(g['v']['p'])+1)           # update page nr
-            # TODO: increment page nr after generating page ()
+
             gbp = copy.deepcopy(g)                          # /* header and footer update
             g['didasonly'] = True
             g['i'] = g['iheader']
@@ -468,6 +461,7 @@ def pagebuilder():
             g = gbp
             g['header'] = header
             g['footer'] = footer                            # */
+
             if g['v']['p'] != '1':                          # if not first page
                 g['pages'] += [g['header'] + pagebp.splitlines(True)]  # add header
             else:
