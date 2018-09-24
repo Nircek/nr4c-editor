@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 # file from https://github.com/Nircek/nr4c-editor
 # licensed under MIT license
