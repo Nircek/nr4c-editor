@@ -485,9 +485,9 @@ if __name__ == '__main__':
         else:
             fi = open(input('INPUT FILE: '), 'r', encoding='utf-8')
         if len(sys.argv) > 2:
-            fo = open(sys.argv[2], 'w', encoding='utf-8')
+            fo = open(sys.argv[2], 'w', encoding='utf-8', newline='\r\n')
         else:
-            fo = open(input('OUTPUT FILE: '), 'w', encoding='utf-8')
+            fo = open(input('OUTPUT FILE: '), 'w', encoding='utf-8', newline='\r\n')
         lines = fi.read().splitlines()
         greset()
         g['lines'] = lines[:]
