@@ -46,7 +46,7 @@ def greset():
         'v': {                  # variables
             'D': datetime.date.today().strftime('%#d %B %Y'), # full date
             'd': datetime.date.today().strftime('%Y-%m-%d'), # short date
-            'p': '0',           # last page nr
+            'p': '1',           # last page nr
             'l': '\n',          # new line
             'nl': '\r'          # no new line
         },
@@ -190,7 +190,7 @@ def cmd():
             elif g['sectionreg'] == 1:                  # if collecting page nr
                 for iterator in range(len(g['sections'])):  # search for section
                     if len(g['sections'][iterator]) < 3:  # which has no page nr
-                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]  # and add page nr
+                        g['sections'][iterator] += [g['v']['p']]  # and add page nr
                         break
         elif g['lines'][g['i'][0]][g['i'][1]] == 't':
             # g['last_a'] = [chr(ord('a')-1)]
@@ -203,8 +203,8 @@ def cmd():
                 g['sectiontitle'] = True
             elif g['sectionreg'] == 1:
                 for iterator in range(len(g['sections'])):
-                    if len(g['sections'][iterator]) < 3:
-                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]
+                    if len(g['sections'][iterator]) < 3: 
+                        g['sections'][iterator] += [g['v']['p']]
                         break
             g['out'] = 'title'
             g['titled'] = True
@@ -225,7 +225,7 @@ def cmd():
             elif g['sectionreg'] == 1:
                 for iterator in range(len(g['sections'])):
                     if len(g['sections'][iterator]) < 3:
-                        g['sections'][iterator] += [str(int(g['v']['p'])+1)]
+                        g['sections'][iterator] += [g['v']['p']]
                         break
         elif g['lines'][g['i'][0]][g['i'][1]] == 'a':
             g['last_a'][0] = chr(ord(g['last_a'][0])+1)     # increment bullet
@@ -440,7 +440,7 @@ def pagebuilder():
         g['page'] += ''.join(g['rlines'])
         pagel = g['page'].splitlines(True)
         m = 110 - len(g['header']) - len(g['footer'])
-        if g['v']['p'] == '0':
+        if g['v']['p'] == '1':
             m += len(g['header'])
         if len(pagel) > m or not g['i'][0] < len(g['lines']) or g['split']:  # if it's over page limit
             if g['i'][0] < len(g['lines']) and not g['split']:
@@ -448,8 +448,6 @@ def pagebuilder():
             else:
                 pagebp = g['page']
             g['split'] = False
-            g['v']['p'] = str(int(g['v']['p'])+1)           # update page nr
-
             gbp = copy.deepcopy(g)                          # /* header and footer update
             g['didasonly'] = True
             g['i'] = g['iheader']
@@ -470,6 +468,7 @@ def pagebuilder():
             # pad to page height and add footer
             g['pages'][-1] += ['\n'] * (110 - len(g['pages'][-1]) - len(g['footer'])) + g['footer']
             g['page'] = ''
+            g['v']['p'] = str(int(g['v']['p'])+1)           # update page nr
         g['rlines'] = []
     out = []
     for e in g['pages']:
