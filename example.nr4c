@@ -91,8 +91,8 @@
 /o
 
 # Section
-/s"First
-/p"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
+/s"First%p
+/p"%p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nec est in sollicitudin. Suspendisse quis nibh commodo ipsum rhoncus finibus vitae in libero. Suspendisse aliquam tincidunt turpis, a aliquam massa laoreet eget. Sed interdum ex id facilisis rutrum. Aliquam mattis semper massa. In finibus tincidunt molestie. Phasellus dignissim ut nisi sit amet dignissim:
 
 /p"There should be a percent ---> %%
 /p"NR4C-%%nrev%%r
@@ -121,7 +121,7 @@
 /s"|Recursion%nl
 //"(not recurency)
 # sUbsection
-/u"First sub ; Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor semper...
+/u"First sub ; %p Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor semper...
 
 /p"Aliquam auctor, ex ac ullamcorper laoreet, nulla neque iaculis ante, sed aliquet libero justo vitae quam. Nam egestas felis eget tortor semper egestas. Vivamus sit amet egestas justo. Phasellus porttitor in lorem eget interdum. Integer id ligula malesuada, ornare sapien nec, scelerisque libero. Proin vel dignissim dui. Maecenas nec enim commodo, varius ipsum vitae, tempus dui. 
 
@@ -130,7 +130,7 @@
 /a:"a:
 /-"b
 /-"c
-/-"Nunc ut ornare augue. Donec condimentum erat rutrum mauris dignissim tempor. Aliquam efficitur lectus id ultrices vulputate. In malesuada ex in semper vestibulum. Curabitur aliquet, nisi at suscipit cursus, turpis tellus semper lorem, ut consequat ligula lorem et est. Phasellus placerat, odio a eleifend fermentum, est quam sagittis nulla, non ornare dolor nisl at tellus. Curabitur venenatis est sed ligula fringilla lacinia. Suspendisse sit amet pellentesque purus.
+/-"Nunc %p ut ornare augue. Donec condimentum erat rutrum mauris dignissim tempor. Aliquam efficitur lectus id ultrices vulputate. In malesuada ex in semper vestibulum. Curabitur aliquet, nisi at suscipit cursus, turpis tellus semper lorem, ut consequat ligula lorem et est. Phasellus placerat, odio a eleifend fermentum, est quam sagittis nulla, non ornare dolor nisl at tellus. Curabitur venenatis est sed ligula fringilla lacinia. Suspendisse sit amet pellentesque purus.
 /-"e
 /-"f
 /eba:
