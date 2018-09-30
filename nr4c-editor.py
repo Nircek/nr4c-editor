@@ -388,7 +388,8 @@ def cmd():
                 elif m == 'c':
                     mf = len(s) + (w-ml)//2
                     me = mf + ml                                # */
-
+                else:
+                    print('WARN(', g['i'], '): unknown mode \'', m, '\'')
                 if g['fline'][mf:me] != ml * ' ':               # covering warning
                     print('WARN(', g['i'], '): covering \'', g['fline'][mf:me], '\' by \'', e, '\'', sep='')
 
