@@ -27,9 +27,13 @@
 import sys
 import copy
 import datetime
+import os
 
 
 def greset():
+    fulldatestring = '%-d %B %Y'
+    if os.name == 'nt':
+        fulldatestring = '%#d %B %Y'
     global g
     g = {
         'lines': [],            # var containing input
@@ -44,7 +48,7 @@ def greset():
         'roz': 0,               # section nr
         'pod': 0,               # subsection nr
         'v': {                  # variables
-            'D': datetime.date.today().strftime('%#d %B %Y'), # full date
+            'D': datetime.date.today().strftime(fulldatestring), # full date
             'd': datetime.date.today().strftime('%Y-%m-%d'), # short date
             'p': '1',           # last page nr
             'l': '\n',          # new line
